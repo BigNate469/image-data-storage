@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image data storage</title>
+  </head>
+  <body>
+    <label for="imgWidth">Width:</label>
+    <input type="number" id="imgWidth" value="480">
+    <label for="imgHeight">Height:</label>
+    <input type="number" id="imgHeight" value="360">
+    <label for="data">Data:</label>
+    <input type="number" id="data" value="Input some data here">
+    <canvas id="canvas" width="480px" height="360px"></canvas>
+    <a id="download">Download image</a>
+    <script>
+      const canvas = document.getElementById('canvas');
+      const imgHeight = document.getElementById('imgHeight');
+      const imgWidth = document.getElementById('imgWidth');
+      const dataInput = document.getElementById('data');
+      const context = canvas.getContext('2d');
+      let width;
+      let height;
+      imgHeight.addEventListener('change', () => {
+        height = imgHeight.value
+        canvas.height = height;
+      });
+      imgWidth.addEventListener('change', () => {
+        width = imgWidth.value;
+        canvas.width = width;
+      });
+      dataInput.addEventListener('change', () => {
+        const inputData = dataInput.value.toString(2);
+        let img = context.createImageData(width, height);
+        for(let i = 0; i < img.data.length / 4; i++) {
+          img.data[i] = inputData.at(i) * 255;
+          img.data[i + 1] = inputData.at(i + 1) * 255;
+          img.data[i + 2] = inputData.at(i + 2) * 255;
+          img.data[i + 3] = 255;
+        };
+      });
+    </script>
+  </body>
+</html>
