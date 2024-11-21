@@ -30,7 +30,7 @@
       });
       dataInput.addEventListener('change', () => {
         const inputData = dataInput.value.toString(2);
-        let img = context.createImageData(width, height);
+        let img = context.createImageData(canvas.width, canvas.height);
         for(let i = 0; i < img.data.length / 4; i++) {
           img.data[i] = inputData.at(i) * 255;
           img.data[i + 1] = inputData.at(i + 1) * 255;
